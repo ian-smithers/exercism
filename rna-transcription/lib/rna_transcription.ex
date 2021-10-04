@@ -8,15 +8,15 @@ defmodule RnaTranscription do
   'UGAC'
   """
   @dna_to_rna_map %{
-      ?A => 'U',
-      ?C => 'G',
-      ?G => 'C',
-      ?T => 'A'
+      ?A => ?U,
+      ?C => ?G,
+      ?G => ?C,
+      ?T => ?A
     }
 
   @spec to_rna([]) :: []
   def to_rna(dna) when length(dna) == 0, do: ''
-  
+
   @spec to_rna(integer) :: [char]
   def to_rna(dna) when is_integer(dna) do
     @dna_to_rna_map[dna]
