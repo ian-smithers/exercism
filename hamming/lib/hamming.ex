@@ -8,15 +8,16 @@ defmodule Hamming do
   {:ok, 4}
   """
   @spec hamming_distance([char], [char]) :: {:ok, non_neg_integer} | {:error, String.t()}
+  def hamming_distance(strand1, strand2) when length(strand1) == length(strand2) do
+    # generate list of collisions and then count them.
+    distance = strand1
+      |> Enum.zip(strand2)
+      |> Enum.map(fn {k, v} -> if k == v, do: 1, else: 0 end)
+      |> Enum.count(fn x -> x == 0 end)
+    {:ok, distance}
+  end
+
   def hamming_distance(strand1, strand2) do
-    cond do
-      length(strand1) == length(strand2) -> 
-        # generate list of collisions and then count them.
-        distance = Enum.zip(strand1, strand2)
-          |> Enum.map(fn {k, v} -> if k == v, do: 1, else: 0 end)
-          |> Enum.count(&(&1 != 1))
-        {:ok, distance}
-      true -> {:error, "strands must be of equal length"} # erk.
-    end
+    {:error, "strands must be of equal length"} # erk.
   end
 end
