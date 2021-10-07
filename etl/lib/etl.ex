@@ -40,11 +40,11 @@ defmodule ETL do
     # }
 
     input
-    |> Enum.flat_map(fn {letter_value, letters} ->
-        Enum.map(letters, fn letter ->
-          {String.downcase(letter), letter_value}
+      |> Enum.flat_map(fn {letter_value, letters} ->
+          Enum.map(letters, fn letter ->
+            {String.downcase(letter), letter_value}
+          end)
         end)
-      end)
       |> Map.new() 
   end
 end
